@@ -17,6 +17,8 @@ class Game {
     var $currentPlayer = 0;
     var $isGettingOutOfPenaltyBox;
 
+    const MIN_PLAYERS = 2;
+
     function  __construct(){
 
    	$this->players = array();
@@ -42,7 +44,7 @@ class Game {
 	}
 
 	function isPlayable() {
-		return ($this->howManyPlayers() >= 2);
+		return ($this->howManyPlayers() >= self::MIN_PLAYERS);
 	}
 
 	function add($playerName) {
