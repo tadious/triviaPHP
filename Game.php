@@ -119,15 +119,15 @@ class Game {
 		return $this->categories[$_index];
 	}
 
-	public function wasCorrectlyAnswered() {
-		$winner = true;
+	private function wasCorrectlyAnswered() {
+		$isNotAWinner = true;
 		if ($this->players[$this->currentPlayer]->getInPenaltyBox()){
 			if ($this->players[$this->currentPlayer]->getIsGettingOutOfPenaltyBox()){
 				echoln("Answer was correct!!!!");
 				$this->players[$this->currentPlayer]->setPurse($this->players[$this->currentPlayer]->getPurse() + 1);
 				echoln($this->players[$this->currentPlayer]->getName(). " now has ".$this->players[$this->currentPlayer]->getPurse(). " Gold Coins.");
 
-				$winner = $this->didPlayerWin();
+				$isNotAWinner = $this->players[$this->currentPlayer]->isNotTheWinner();
 			}
 		} else {
 
@@ -135,16 +135,16 @@ class Game {
 			$this->players[$this->currentPlayer]->setPurse($this->players[$this->currentPlayer]->getPurse() + 1);
 			echoln($this->players[$this->currentPlayer]->getName(). " now has ".$this->players[$this->currentPlayer]->getPurse(). " Gold Coins.");
 
-			$winner = $this->didPlayerWin();
+			$isNotAWinner = $this->players[$this->currentPlayer]->isNotTheWinner();
 		}
 
 		$this->currentPlayer++;
 		if ($this->currentPlayer == count($this->players)) $this->currentPlayer = 0;
 
-		return $winner;
+		return $isNotAWinner;
 	}
 
-	public function wrongAnswer(){
+	private function wrongAnswer(){
 		echoln("Question was incorrectly answered");
 		echoln($this->players[$this->currentPlayer]->getName() . " was sent to the penalty box");
 		$this->players[$this->currentPlayer]->setInPenaltyBox(true);
@@ -155,8 +155,11 @@ class Game {
 		return true;
 	}
 
-
-	private function didPlayerWin() {
-		return !($this->players[$this->currentPlayer]->getPurse() == 6);
+	public function getAnswer() {
+	  	if (rand(0,9) == 7) {
+        	return $this->wrongAnswer();
+      	} else {
+        	return $this->wasCorrectlyAnswered();
+      	}
 	}
 }

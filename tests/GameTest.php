@@ -26,14 +26,22 @@ class GameTest extends PHPUnit_Framework_TestCase
     return $method->invokeArgs($object, $parameters);
   }
 
-  public function testIsPlayable()
-  {
-    // test to ensure that there are enough players for the game to begin
+  public function testIsPlayableWithNoPlayers() {
     $game = new Game();
     $this->assertEquals($game->isPlayable(), false);
+  }
 
+  public function testIsPlayableWithOnePlayer() {
+    $game = new Game();
     $game->add(new Player("Player 1"));
+    
     $this->assertEquals($game->isPlayable(), false);
+  }
+
+  public function testIsPlayableWithTwoPlayers()
+  {
+    $game = new Game();
+    $game->add(new Player("Player 1"));
 
     $game->add(new Player("Player 2"));
     $this->assertEquals($game->isPlayable(), true);
@@ -48,6 +56,20 @@ class GameTest extends PHPUnit_Framework_TestCase
 
     $game->add(new Player("Player 2"));
     $this->assertEquals($this->invokeMethod($game, 'howManyPlayers', array()), 2);
+  }
+
+
+  public function testRollWhileInPenaltyBox() {
+    $game = new Game();
+    $player1 = new Player("Player 1");
+    $player1->setInPenaltyBox(true);
+    $player2 = new Player("Player 2");
+    $game->add($player1);
+    $game->add($player2);
+
+    $game->roll(3);
+
+    $this->assertEquals($player1->getIsGettingOutOfPenaltyBox(), true);
   }
 }
 ?>

@@ -8,6 +8,8 @@ class Player {
     private $inPenaltyBox;
     private $isGettingOutOfPenaltyBox;
 
+    const WINNING_COINS = 6;
+
     public function  __construct($name) {
     	$this->name = $name;
     	$this->place = 0;
@@ -54,6 +56,10 @@ class Player {
 
     public function getIsGettingOutOfPenaltyBox() {
     	return $this->isGettingOutOfPenaltyBox;
+    }
+
+    public function isNotTheWinner() {
+    	return !($this->purse === self::WINNING_COINS);
     }
 }
 
