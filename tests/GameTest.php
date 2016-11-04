@@ -1,6 +1,7 @@
 <?php
 
 require_once('./Game.php');
+require_once('./Player.php');
 
 class GameTest extends PHPUnit_Framework_TestCase
 {
@@ -31,10 +32,10 @@ class GameTest extends PHPUnit_Framework_TestCase
     $game = new Game();
     $this->assertEquals($game->isPlayable(), false);
 
-    $game->add("Player 1");
+    $game->add(new Player("Player 1"));
     $this->assertEquals($game->isPlayable(), false);
 
-    $game->add("Player 2");
+    $game->add(new Player("Player 2"));
     $this->assertEquals($game->isPlayable(), true);
   }
 
@@ -42,10 +43,10 @@ class GameTest extends PHPUnit_Framework_TestCase
   	$game = new Game();
   	$this->assertEquals($this->invokeMethod($game, 'howManyPlayers', array()), 0);
 
-  	$game->add("Player 1");
+  	$game->add(new Player("Player 1"));
     $this->assertEquals($this->invokeMethod($game, 'howManyPlayers', array()), 1);
 
-    $game->add("Player 2");
+    $game->add(new Player("Player 2"));
     $this->assertEquals($this->invokeMethod($game, 'howManyPlayers', array()), 2);
   }
 }
