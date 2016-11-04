@@ -119,7 +119,7 @@ class Game {
 		return $this->categories[$_index];
 	}
 
-	private function wasCorrectlyAnswered() {
+	private function correctAnswer() {
 		$isNotAWinner = true;
 		if ($this->players[$this->currentPlayer]->getInPenaltyBox()){
 			if ($this->players[$this->currentPlayer]->getIsGettingOutOfPenaltyBox()){
@@ -159,7 +159,7 @@ class Game {
 	  	if (rand(0,9) == 7) {
         	return $this->wrongAnswer();
       	} else {
-        	return $this->wasCorrectlyAnswered();
+        	return $this->correctAnswer();
       	}
 	}
 }
