@@ -1,14 +1,15 @@
 <?php
 
 include __DIR__.'/Game.php';
+include __DIR__.'/Player.php';
 
 $notAWinner;
 
   $aGame = new Game();
   
-  $aGame->add("Chet");
-  $aGame->add("Pat");
-  $aGame->add("Sue");
+  $aGame->add(new Player("Chet"));
+  $aGame->add(new Player("Pat"));
+  $aGame->add(new Player("Sue"));
   
   if($aGame->isPlayable()) {
     do {
