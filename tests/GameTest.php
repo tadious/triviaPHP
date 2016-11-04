@@ -3,10 +3,10 @@
 require_once('./Game.php');
 require_once('./Player.php');
 
-class GameTest extends PHPUnit_Framework_TestCase
-{
-  public function setUp(){ }
-  public function tearDown(){ }
+class GameTest extends PHPUnit_Framework_TestCase {
+
+  public function setUp() { }
+  public function tearDown() { }
 
   /**
   * Call protected/private method of a class.
@@ -17,8 +17,7 @@ class GameTest extends PHPUnit_Framework_TestCase
   *
   * @return mixed Method return.
   */
-  public function invokeMethod(&$object, $methodName, array $parameters = array())
-  {
+  public function invokeMethod(&$object, $methodName, array $parameters = array()) {
     $reflection = new \ReflectionClass(get_class($object));
     $method = $reflection->getMethod($methodName);
     $method->setAccessible(true);
@@ -38,8 +37,7 @@ class GameTest extends PHPUnit_Framework_TestCase
     $this->assertEquals($game->isPlayable(), false);
   }
 
-  public function testIsPlayableWithTwoPlayers()
-  {
+  public function testIsPlayableWithTwoPlayers() {
     $game = new Game();
     $game->add(new Player("Player 1"));
 

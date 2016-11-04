@@ -1,9 +1,9 @@
 <?php
 
-include __DIR__.'/Game.php';
-include __DIR__.'/Player.php';
+  include __DIR__.'/Game.php';
+  include __DIR__.'/Player.php';
 
-$notAWinner;
+  $notAWinner = false;
 
   $aGame = new Game();
   
@@ -22,4 +22,4 @@ $notAWinner;
     echoln("Error: At least ". Game::MIN_PLAYERS." are required for the game to continue.");
   }
   
-  
+?>  
